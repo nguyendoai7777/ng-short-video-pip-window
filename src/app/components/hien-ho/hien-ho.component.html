@@ -1,0 +1,25 @@
+<div class="relative w-full h-full">
+  <!-- <img
+    class="w-full h-full"
+    src="https://i.pinimg.com/736x/13/be/95/13be95147b920e7c4ee958ff30db7a11.jpg"
+  /> -->
+
+  <video class="w-full h-full" src="video.mp4" controls></video>
+  <div class="absolute top-0 left-0">
+    <div class="">
+      <a href="https://zingmp3.vn/Hien-Ho" class="flex py-3 px-5 text-teal-600"
+        >Hien ho</a
+      >
+      <div class="">
+        <button
+          class="px-6 py-3 text-teal-500 flex items-center gap-2"
+          (click)="setCount.emit()"
+        >
+          <!-- &#10084; -->
+          <div class="self-center flex text-[30px]">&hearts;</div>
+          <div class="self-center flex text-[18px] pt-[5px]">{{ count() }}</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

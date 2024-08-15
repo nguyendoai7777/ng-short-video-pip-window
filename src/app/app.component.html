@@ -1,0 +1,27 @@
+<div class="">
+  @if (pipCtx.pipWindow()) {
+    <div class="text-slate-200">
+      Placeholder wating for floating window close
+    </div>
+    <button
+      (click)="closePipWindow()"
+      class="py-3 px-6 rounded text-white bg-teal-600 mt-12"
+    >
+      Turn off
+    </button>
+  } @else {
+    <div
+      class="border border-teal-700 rounded-lg overflow-hidden h-[calc(100svh-160px)] max-w-[531px] aspect-[9/16] relative"
+    >
+      <hien-ho [count]="count()" (setCount)="setCount()" />
+      @if (pipCtx.isSupported) {
+        <button
+          (click)="openPipWindow()"
+          class="absolute bottom-0 right-0 py-3 px-6 rounded text-white bg-teal-600 mt-12"
+        >
+          Open in Floating window
+        </button>
+      }
+    </div>
+  }
+</div>
