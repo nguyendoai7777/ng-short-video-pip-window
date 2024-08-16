@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HienHo } from './components/hien-ho/hien-ho.component';
-import { PipWindowService } from './components/pip-window/pip-window.service';
+import { PipWindowController } from './components/pip-window/pip-window.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,7 @@ export class AppComponent {
 
   count = signal(0);
 
-  pipCtx = inject(PipWindowService);
+  pipCtx = inject(PipWindowController);
   applicationRef = inject(ApplicationRef);
 
   setCount() {
@@ -50,11 +50,15 @@ export class AppComponent {
       hostElement: this.pipCtx.pipWindow()!.document.body,
     });
 
-    this.pipComponent.setInput('count', this.count());
+    // binding Component to pip window
     this.applicationRef.attachView(this.pipComponent.hostView);
+
+    // binding input
+    this.pipComponent.setInput('count', this.count());
+
+    // listen event from component
     this.countSubs = this.pipComponent.instance.setCount.subscribe(() => {
       this.setCount();
-      this.pipComponent!.setInput('count', this.count());
     });
   }
 
@@ -66,5 +70,6 @@ export class AppComponent {
   closePipWindow() {
     this.pipCtx.closePipWindow();
     this.cleanupComponetWhenClosePip();
+    this.pipCtx.ngOnDestroy(() => {});
   }
 }
